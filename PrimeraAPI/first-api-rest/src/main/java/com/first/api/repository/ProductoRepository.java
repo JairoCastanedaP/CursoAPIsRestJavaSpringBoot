@@ -10,6 +10,12 @@ import com.first.api.model.Producto;
 
 @Repository
 public class ProductoRepository {
+	
+	
+
+	public ProductoRepository() {
+		//createProductos();
+	}
 
 	private List<Producto> productos = new ArrayList<>();
 	
@@ -58,7 +64,12 @@ public class ProductoRepository {
 	
 	public String deleteProduct(Integer id) {
 		productos.removeIf(x -> x.getId() == id);
-		
+		/*for(int i=0;i<productos.size();i++) {
+			if(productos.get(i).getId() == id) {
+				productos.remove(i);
+				break;
+			}
+		}*/
 		return null;
 	}
 	

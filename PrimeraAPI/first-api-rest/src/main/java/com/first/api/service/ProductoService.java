@@ -33,7 +33,5 @@ public class ProductoService {
 	public Producto updateProducto(Producto producto) {
 		return productoRepository.updateProduct(producto);
 	}
-	
-	
 
 }
