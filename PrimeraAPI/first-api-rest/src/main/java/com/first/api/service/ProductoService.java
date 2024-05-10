@@ -30,6 +30,7 @@ public class ProductoService {
 		return "producto eliminado: "+id;
 	}
 	
+	
 	public Producto updateProducto(Producto producto) {
 		return productoRepository.updateProduct(producto);
 	}
