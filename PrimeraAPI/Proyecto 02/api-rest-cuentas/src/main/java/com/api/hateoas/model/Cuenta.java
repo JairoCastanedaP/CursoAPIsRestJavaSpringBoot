@@ -5,6 +5,9 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import org.springframework.hateoas.RepresentationModel;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +16,7 @@ import jakarta.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Cuenta {
+public class Cuenta extends RepresentationModel<Cuenta>{
 	
 	public Cuenta(Integer id, String numero_cuenta) {
 		super();
@@ -32,9 +35,17 @@ public class Cuenta {
 	@Column(length = 20, nullable=false, unique = true)
 	private String numero_cuenta;	
 	
-	private float balance;
+	private float monto;
 
 
+
+	public float getMonto() {
+		return monto;
+	}
+
+	public void setMonto(float monto) {
+		this.monto = monto;
+	}
 
 	public Integer getId() {
 		return id;
@@ -52,14 +63,6 @@ public class Cuenta {
 		this.numero_cuenta = numero_cuenta;
 	}
 
-	public float getBalance() {
-		return balance;
-	}
-
-	public void setBalance(float balance) {
-		this.balance = balance;
-	}
-	
 	
 	
 	
