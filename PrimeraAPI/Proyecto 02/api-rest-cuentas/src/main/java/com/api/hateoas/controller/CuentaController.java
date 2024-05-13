@@ -1,6 +1,9 @@
 package com.api.hateoas.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.IanaLinkRelations;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,6 +19,8 @@ import com.api.hateoas.model.Cuenta;
 import com.api.hateoas.service.CuentaService;
 import java.util.*;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
+
 @RestController
 @RequestMapping("/api/cuentas")
 
@@ -30,6 +35,16 @@ public class CuentaController {
 		if(cuentas.isEmpty()) {
 			return ResponseEntity.noContent().build();
 		}
+		
+		for(Cuenta cuenta: cuentas) {
+			cuenta.add(linkTo(methodOn(CuentaController.class).listarCuentas(cuenta.getId()
+					)).withSelfRel());
+cuenta.add(linkTo(methodOn(CuentaController.class).listarCuentas()).withRel(IanaLinkRelations.COLLECTION));
+
+		}
+		
+		CollectionModel<Cuenta> modelo=CollectionModel.of(cuentas);
+		modelo.add(linkTo(methodOn(CuentaController.class).listarCuentas()).withSelfRel());
 		return new ResponseEntity<>(cuentas, HttpStatus.OK);
 	}
 	
@@ -37,6 +52,9 @@ public class CuentaController {
 	public ResponseEntity<Cuenta> listarCuentas(@PathVariable Integer id){
 		try {
 			Cuenta cuenta= cuentaService.get(id);
+			cuenta.add(linkTo(methodOn(CuentaController.class).listarCuentas(cuenta.getId()
+									)).withSelfRel());
+			cuenta.add(linkTo(methodOn(CuentaController.class).listarCuentas()).withRel(IanaLinkRelations.COLLECTION));
 			return new ResponseEntity<>(cuenta, HttpStatus.OK);
 			
 		}catch(Exception ex) {
@@ -46,7 +64,10 @@ public class CuentaController {
 	@PostMapping
 	public ResponseEntity<Cuenta> guardarCuenta(@RequestBody Cuenta cuenta){
 		Cuenta cuentaBBDD = cuentaService.save(cuenta);
-		return new ResponseEntity<>(cuenta, HttpStatus.CREATED);
+		cuentaBBDD.add(linkTo(methodOn(CuentaController.class).listarCuentas(cuentaBBDD.getId())).withSelfRel());
+		cuentaBBDD.add(linkTo(methodOn(CuentaController.class).listarCuentas()).withRel(IanaLinkRelations.COLLECTION));
+		
+		return ResponseEntity.created(linkTo(methodOn(CuentaController.class).listarCuentas(cuentaBBDD.getId())).toUri()).body(cuentaBBDD);
 	}
 	
 	@PutMapping
