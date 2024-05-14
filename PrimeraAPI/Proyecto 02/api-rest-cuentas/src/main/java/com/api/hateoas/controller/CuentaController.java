@@ -85,6 +85,20 @@ cuenta.add(linkTo(methodOn(CuentaController.class).listarCuentas()).withRel(Iana
 		return new ResponseEntity<>(cuenta, HttpStatus.OK);
 	}
 	
+	@PatchMapping("/{id}/retiro")
+	public ResponseEntity<Cuenta> retirarDinero(@PathVariable Integer id, @RequestBody Monto monto){
+		
+		Cuenta cuentaBBDD = cuentaService.retirar(monto.getMonto(), id);
+
+		cuentaBBDD.add(linkTo(methodOn(CuentaController.class).listarCuentas(cuentaBBDD.getId())).withSelfRel());
+		
+		cuentaBBDD.add(linkTo(methodOn(CuentaController.class).retirarDinero(cuentaBBDD.getId(), null)).withRel("retiros"));
+		cuentaBBDD.add(linkTo(methodOn(CuentaController.class).listarCuentas()).withRel(IanaLinkRelations.COLLECTION));
+			
+
+		return new ResponseEntity<>(cuentaBBDD, HttpStatus.OK);
+	}
+	
 	@PatchMapping("/{id}/deposito")
 	public ResponseEntity<Cuenta> depositarDinero(@PathVariable Integer id, @RequestBody Monto monto){
 		
