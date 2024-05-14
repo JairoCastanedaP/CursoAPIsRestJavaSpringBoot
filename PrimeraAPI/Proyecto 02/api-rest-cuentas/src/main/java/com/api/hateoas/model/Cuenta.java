@@ -17,17 +17,7 @@ import jakarta.persistence.*;
 @AllArgsConstructor
 
 public class Cuenta extends RepresentationModel<Cuenta>{
-	
-	public Cuenta(Integer id, String numero_cuenta) {
-		super();
-		this.id = id;
-		this.numero_cuenta = numero_cuenta;
-	}
-	
-	public Cuenta() {
 		
-	}
-	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -37,14 +27,15 @@ public class Cuenta extends RepresentationModel<Cuenta>{
 	
 	private float monto;
 
-
-
-	public float getMonto() {
-		return monto;
+	public Cuenta(Integer id, String numero_cuenta, float monto) {
+		super();
+		this.id = id;
+		this.numero_cuenta = numero_cuenta;
+		this.monto = monto;
 	}
 
-	public void setMonto(float monto) {
-		this.monto = monto;
+	public Cuenta() {
+		super();
 	}
 
 	public Integer getId() {
@@ -63,8 +54,13 @@ public class Cuenta extends RepresentationModel<Cuenta>{
 		this.numero_cuenta = numero_cuenta;
 	}
 
-	
-	
+	public float getMonto() {
+		return monto;
+	}
+
+	public void setMonto(float monto) {
+		this.monto = monto;
+	}
 	
 	
 
