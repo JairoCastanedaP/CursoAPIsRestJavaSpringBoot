@@ -34,4 +34,8 @@ public class CuentaService {
 	public void delete(Integer id) {
 		cuentaRepository.deleteById(id);
 	}
+	public Cuenta despositar(float monto, Integer id) {
+		cuentaRepository.actualizarMonto(monto, id);
+		return cuentaRepository.findById(id).get();
+	}
 }
