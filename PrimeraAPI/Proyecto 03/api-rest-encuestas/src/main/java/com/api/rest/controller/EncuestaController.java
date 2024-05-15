@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.api.rest.exception.ResourceNotFoundException;
 import com.api.rest.model.Encuesta;
 import com.api.rest.repositories.EncuestaRepository;
 
@@ -51,6 +52,8 @@ public class EncuestaController {
 	
 	@GetMapping("/encuestas/{encuestaId}")
 	public ResponseEntity<?> obtenerEncuesta(@PathVariable Long encuestaId){
+		
+		verifyEncuesta(encuestaId);
 		Optional<Encuesta> encuesta = encuestRespository.findById(encuestaId);
 		if(encuesta.isPresent()) {
 			return new ResponseEntity<>(encuesta, HttpStatus.OK);
@@ -62,6 +65,8 @@ public class EncuestaController {
 	
 	@PutMapping("/encuestas/{encuestaId}")
 	public ResponseEntity<?> actualizarEncuesta(@RequestBody Encuesta encuesta, @PathVariable Long encuestaId){
+		verifyEncuesta(encuestaId);
+		
 		encuesta.setId(encuestaId);
 		encuestRespository.save(encuesta);
 		
@@ -70,11 +75,20 @@ public class EncuestaController {
 	
 	@DeleteMapping("/encuestas/{encuestaId}")
 	public ResponseEntity<?> eliminarEncuesta(@PathVariable Long encuestaId){
+		verifyEncuesta(encuestaId);
 		try {
 			encuestRespository.deleteById(encuestaId);
 			return ResponseEntity.noContent().build();
 		}catch(Exception exception) {
 			return ResponseEntity.notFound().build();
+		}
+	}
+	
+	protected void verifyEncuesta(Long encuestaId) {
+		Optional<Encuesta> encuesta = encuestRespository.findById(encuestaId);
+		
+		if(!encuesta.isPresent()) {
+			throw new ResourceNotFoundException("Encuesta con el ID: "+ encuestaId+" no econtrada");
 		}
 	}
 }
