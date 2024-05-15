@@ -1,10 +1,12 @@
-package com.api.rest.controller;
+package com.api.rest.controller.v2;
 
 import java.net.URI;
 import org.springframework.http.HttpHeaders;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -22,16 +25,17 @@ import com.api.rest.repositories.EncuestaRepository;
 
 import jakarta.validation.Valid;
 
-@RestController
+@RestController("EncuestaControllerV2")
+@RequestMapping("/v2")
 public class EncuestaController {
 	
 	@Autowired
 	private EncuestaRepository encuestRespository;
 	
 	@GetMapping("/encuestas")
-	public ResponseEntity<Iterable<Encuesta>> listarTodasLasEncuestas(){
-		
-		return new ResponseEntity<>(encuestRespository.findAll(),HttpStatus.OK);
+	public ResponseEntity<Iterable<Encuesta>> listarTodasLasEncuestas(Pageable pageable){
+		Page<Encuesta> encuestas = encuestRespository.findAll(pageable);
+		return new ResponseEntity<>(encuestas,HttpStatus.OK);
 	}
 	
 	@PostMapping("/encuestas")

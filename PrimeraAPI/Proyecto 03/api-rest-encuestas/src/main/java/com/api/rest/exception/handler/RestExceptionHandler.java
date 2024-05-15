@@ -12,6 +12,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.api.rest.dto.ErrorDetail;
 import com.api.rest.dto.ValidationError;
@@ -38,7 +39,7 @@ public class RestExceptionHandler {
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException exception, HttpServletRequest httpServletRequest){
+	public @ResponseBody  ErrorDetail handleMethodArgumentNotValidException(MethodArgumentNotValidException exception, HttpServletRequest httpServletRequest){
 		ErrorDetail errorDetail = new ErrorDetail();
 		errorDetail.setTimeStamp(new Date().getTime());
 		errorDetail.setStatus(HttpStatus.BAD_REQUEST.value());
@@ -65,11 +66,10 @@ public class RestExceptionHandler {
 			
 			ValidationError valitdationerror= new ValidationError();
 			valitdationerror.setCode(fieldError.getCode());
-			valitdationerror.setMessage(fieldError.getCode());
-			valitdationerror.setMessage(fieldError.getDefaultMessage());
+			valitdationerror.setMessage(messageSource.getMessage(fieldError, null));
 			validationErrorList.add(valitdationerror);
 		}		
 		
-		return new ResponseEntity<>(errorDetail, null, HttpStatus.BAD_REQUEST);
+		return errorDetail;
 	}
 }
