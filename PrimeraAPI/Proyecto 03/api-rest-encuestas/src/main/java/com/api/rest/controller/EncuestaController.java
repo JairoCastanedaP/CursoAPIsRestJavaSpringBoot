@@ -20,6 +20,8 @@ import com.api.rest.exception.ResourceNotFoundException;
 import com.api.rest.model.Encuesta;
 import com.api.rest.repositories.EncuestaRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class EncuestaController {
 	
@@ -33,7 +35,7 @@ public class EncuestaController {
 	}
 	
 	@PostMapping("/encuestas")
-	public ResponseEntity<?> crearEncuesta(@RequestBody Encuesta encuesta){
+	public ResponseEntity<?> crearEncuesta(@Valid @RequestBody Encuesta encuesta){
 		
 		encuesta= encuestRespository.save(encuesta);
 		
@@ -64,7 +66,7 @@ public class EncuestaController {
 	}
 	
 	@PutMapping("/encuestas/{encuestaId}")
-	public ResponseEntity<?> actualizarEncuesta(@RequestBody Encuesta encuesta, @PathVariable Long encuestaId){
+	public ResponseEntity<?> actualizarEncuesta(@Valid @RequestBody Encuesta encuesta, @PathVariable Long encuestaId){
 		verifyEncuesta(encuestaId);
 		
 		encuesta.setId(encuestaId);
