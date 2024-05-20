@@ -19,7 +19,8 @@ import lombok.NoArgsConstructor;
 public class Cliente {
 
 	@Id
-	private String id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 	
 	private String nombre;
 	
@@ -29,5 +30,62 @@ public class Cliente {
 	
 	@OneToMany(mappedBy = "cliente")	
 	private List<CuentaBancaria> cuentasBancarias;
+
+	public Cliente() {
+		super();
+	}
+	
+
+
+
+	public Cliente(Long id, String nombre, String email, List<CuentaBancaria> cuentasBancarias) {
+		super();
+		this.id = id;
+		this.nombre = nombre;
+		this.email = email;
+		this.cuentasBancarias = cuentasBancarias;
+	}
+
+
+
+
+	public Long getId() {
+		return id;
+	}
+
+
+
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+
+
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public List<CuentaBancaria> getCuentasBancarias() {
+		return cuentasBancarias;
+	}
+
+	public void setCuentasBancarias(List<CuentaBancaria> cuentasBancarias) {
+		this.cuentasBancarias = cuentasBancarias;
+	}
+	
 	
 }

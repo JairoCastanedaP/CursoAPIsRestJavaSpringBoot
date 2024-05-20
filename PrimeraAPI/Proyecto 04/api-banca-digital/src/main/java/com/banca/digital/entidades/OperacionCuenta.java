@@ -37,4 +37,60 @@ public class OperacionCuenta {
 	
 	@ManyToOne
 	private CuentaBancaria cuentaBancaria;
+
+	public OperacionCuenta() {
+		super();
+	}
+
+	public OperacionCuenta(Long id, Date fechaOperacion, double monto, TipoOperacion tipoOperacion,
+			CuentaBancaria cuentaBancaria) {
+		super();
+		this.id = id;
+		this.fechaOperacion = fechaOperacion;
+		this.monto = monto;
+		this.tipoOperacion = tipoOperacion;
+		this.cuentaBancaria = cuentaBancaria;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Date getFechaOperacion() {
+		return fechaOperacion;
+	}
+
+	public void setFechaOperacion(Date fechaOperacion) {
+		this.fechaOperacion = fechaOperacion;
+	}
+
+	public double getMonto() {
+		return monto;
+	}
+
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
+
+	public TipoOperacion getTipoOperacion() {
+		return tipoOperacion;
+	}
+
+	public void setTipoOperacion(TipoOperacion tipoOperacion) {
+		this.tipoOperacion = tipoOperacion;
+	}
+
+	public CuentaBancaria getCuentaBancaria() {
+		return cuentaBancaria;
+	}
+
+	public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
+		this.cuentaBancaria = cuentaBancaria;
+	}
+	
+	
 }

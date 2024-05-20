@@ -15,4 +15,25 @@ import lombok.NoArgsConstructor;
 public class CuentaActual extends CuentaBancaria{
 	private double sobregiro;
 
+	
+	
+	public CuentaActual() {
+		super();
+	}
+
+	public CuentaActual(double sobregiro) {
+		super();
+		this.sobregiro = sobregiro;
+	}
+
+	public double getSobregiro() {
+		return sobregiro;
+	}
+
+	public void setSobregiro(double sobregiro) {
+		this.sobregiro = sobregiro;
+	}
+	
+	
+
 }
