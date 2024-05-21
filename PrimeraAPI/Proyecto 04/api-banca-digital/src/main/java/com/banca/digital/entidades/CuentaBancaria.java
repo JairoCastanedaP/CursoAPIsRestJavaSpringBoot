@@ -9,6 +9,7 @@ import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -40,7 +41,7 @@ public class CuentaBancaria {
 	@ManyToOne
 	private Cliente cliente;
 	
-	@OneToMany(mappedBy = "cuentaBancaria")
+	@OneToMany(mappedBy = "cuentaBancaria", fetch = FetchType.LAZY)
 	private List<OperacionCuenta> operacionCuenta;
 
 	public CuentaBancaria() {

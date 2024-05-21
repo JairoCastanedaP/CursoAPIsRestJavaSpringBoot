@@ -20,6 +20,7 @@ import com.banca.digital.enums.TipoOperacion;
 import com.banca.digital.repositorios.ClienteRepository;
 import com.banca.digital.repositorios.CuentaBancariaRespository;
 import com.banca.digital.repositorios.OperacionCuentaRespository;
+import com.banca.digital.servicios.BancoService;
 
 @SpringBootApplication
 public class ApiBancaDigitalApplication {
@@ -28,6 +29,12 @@ public class ApiBancaDigitalApplication {
 		SpringApplication.run(ApiBancaDigitalApplication.class, args);	}
 	
 	@Bean
+	CommandLineRunner commandLineRunner(BancoService bancoService) {
+		return args ->{
+			bancoService.consultar();
+		};
+	}
+	//@Bean
 	CommandLineRunner start(ClienteRepository clienteRepository, CuentaBancariaRespository cuentaBancariaRespository, OperacionCuentaRespository operacionCuentaRespository) {
 		return args->{
 			Stream.of("Christian","Julen", "pedro","Leo").forEach(nombre-> {
