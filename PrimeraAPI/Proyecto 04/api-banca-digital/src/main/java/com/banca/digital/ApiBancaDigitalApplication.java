@@ -38,7 +38,7 @@ public class ApiBancaDigitalApplication {
 			bancoService.consultar();
 		};
 	}
-	@Bean
+	//@Bean
 	CommandLineRunner start(CuentaBancariaService cuentaBancariaService) {
 		return args->{
 			Stream.of("Christian","Julen", "pedro","Leo").forEach(nombre-> {

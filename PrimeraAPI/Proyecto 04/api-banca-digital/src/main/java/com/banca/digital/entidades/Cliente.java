@@ -2,6 +2,8 @@ package com.banca.digital.entidades;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -29,6 +31,7 @@ public class Cliente {
 	//Un cliente tiene muchas cuentas bancarias
 	
 	@OneToMany(mappedBy = "cliente")	
+	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
 	private List<CuentaBancaria> cuentasBancarias;
 
 	public Cliente() {
