@@ -1,6 +1,8 @@
 package com.banca.digital.servicios.impl;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +13,8 @@ import com.banca.digital.entidades.Cliente;
 import com.banca.digital.entidades.CuentaActual;
 import com.banca.digital.entidades.CuentaAhorro;
 import com.banca.digital.entidades.CuentaBancaria;
+import com.banca.digital.entidades.OperacionCuenta;
+import com.banca.digital.enums.TipoOperacion;
 import com.banca.digital.excepciones.BalanceInsuficienteException;
 import com.banca.digital.excepciones.ClienteNotFoundExcepcton;
 import com.banca.digital.excepciones.CuentaBancariaNotFoundException;
@@ -51,47 +55,106 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 	@Override
 	public CuentaActual saveCuentaBancariaActual(double balanceInicial, double sobregiro, Long clienteId)
 			throws ClienteNotFoundExcepcton {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Cliente cliente= clienteRepository.findById(clienteId).orElse(null);
+		
+		if(cliente == null) {
+			throw new ClienteNotFoundExcepcton("Cliente no encontrado");
+		}
+		
+		CuentaActual cuentaActual = new CuentaActual();
+		cuentaActual.setId(UUID.randomUUID().toString());
+		cuentaActual.setFechaCreacion(new Date());
+		cuentaActual.setBalance(balanceInicial);
+		cuentaActual.setSobregiro(sobregiro);
+		cuentaActual.setCliente(cliente);
+		
+		CuentaActual cuentaActualBBDD = cuentaBancariaRespository.save(cuentaActual);
+		return cuentaActualBBDD;
 	}
 
 	@Override
 	public CuentaAhorro saveCuentaBancariaAhorro(double balanceInicial, double tasaInteres, Long clienteId)
 			throws ClienteNotFoundExcepcton {
-		// TODO Auto-generated method stub
-		return null;
+		Cliente cliente= clienteRepository.findById(clienteId).orElse(null);
+		
+		if(cliente == null) {
+			throw new ClienteNotFoundExcepcton("Cliente no encontrado");
+		}
+		
+		CuentaAhorro cuentaAhorro = new CuentaAhorro();
+		cuentaAhorro.setId(UUID.randomUUID().toString());
+		cuentaAhorro.setFechaCreacion(new Date());
+		cuentaAhorro.setBalance(balanceInicial);
+		cuentaAhorro.setTasaInteres(tasaInteres);
+		cuentaAhorro.setCliente(cliente);
+		
+		CuentaAhorro cuentaAhorroBBDD = cuentaBancariaRespository.save(cuentaAhorro);
+		return cuentaAhorroBBDD;
+
 	}
 
 	@Override
 	public List<Cliente> listClientes() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return clienteRepository.findAll();
 	}
 
 	@Override
 	public CuentaBancaria getCuentaBancaria(String cuentaId) throws CuentaBancariaNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+
+		CuentaBancaria cuentaBancaria= cuentaBancariaRespository.findById(cuentaId)
+				.orElseThrow(()-> new CuentaBancariaNotFoundException("Cuenta bancaria no encontrada"));
+		return cuentaBancaria;
 	}
 
 	@Override
 	public void debit(String cuentaId, double monto, String descripcion)
 			throws CuentaBancariaNotFoundException, BalanceInsuficienteException {
-		// TODO Auto-generated method stub
+		CuentaBancaria cuentaBancaria= getCuentaBancaria(cuentaId);
+		if(cuentaBancaria.getBalance()<monto) {
+			throw new BalanceInsuficienteException("Balance insuficiente");
+		}
 		
+		OperacionCuenta operacionCuenta = new OperacionCuenta();
+		operacionCuenta.setTipoOperacion(TipoOperacion.DEBITO);
+		operacionCuenta.setMonto(monto);
+		operacionCuenta.setDescripcion(descripcion);
+		operacionCuenta.setFechaOperacion(new Date());
+		operacionCuenta.setCuentaBancaria(cuentaBancaria);
+		operacionCuentaRespository.save(operacionCuenta);
+		cuentaBancaria.setBalance(cuentaBancaria.getBalance() - monto);
 	}
 
 	@Override
 	public void transfer(String cuentaIdPropietario, String cuentaIdDestinatario, double monto)
 			throws CuentaBancariaNotFoundException, BalanceInsuficienteException {
-		// TODO Auto-generated method stub
-		
+		debit(cuentaIdPropietario,monto,"transferencia a : "+cuentaIdDestinatario);
+		credit(cuentaIdDestinatario, monto,"transferencia de : " +cuentaIdPropietario);
 	}
 
 	@Override
 	public List<CuentaBancaria> listCuentasBancarias() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return cuentaBancariaRespository.findAll();
+	}
+
+	@Override
+	public void credit(String cuentaId, double monto, String descripcion)
+			throws CuentaBancariaNotFoundException, BalanceInsuficienteException {
+		
+		CuentaBancaria cuentaBancaria= getCuentaBancaria(cuentaId);
+		
+		
+		OperacionCuenta operacionCuenta = new OperacionCuenta();
+		operacionCuenta.setTipoOperacion(TipoOperacion.DEBITO);
+		operacionCuenta.setMonto(monto);
+		operacionCuenta.setDescripcion(descripcion);
+		operacionCuenta.setFechaOperacion(new Date());
+		operacionCuenta.setCuentaBancaria(cuentaBancaria);
+		operacionCuentaRespository.save(operacionCuenta);
+		cuentaBancaria.setBalance(cuentaBancaria.getBalance() + monto);
+		
 	}
 
 }

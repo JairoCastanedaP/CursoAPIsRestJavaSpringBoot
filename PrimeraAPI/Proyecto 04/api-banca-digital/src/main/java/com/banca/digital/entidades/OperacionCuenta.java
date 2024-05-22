@@ -44,15 +44,20 @@ public class OperacionCuenta {
 		super();
 	}
 
+	
+
 	public OperacionCuenta(Long id, Date fechaOperacion, double monto, TipoOperacion tipoOperacion,
-			CuentaBancaria cuentaBancaria) {
+			CuentaBancaria cuentaBancaria, String descripcion) {
 		super();
 		this.id = id;
 		this.fechaOperacion = fechaOperacion;
 		this.monto = monto;
 		this.tipoOperacion = tipoOperacion;
 		this.cuentaBancaria = cuentaBancaria;
+		this.descripcion = descripcion;
 	}
+
+
 
 	public Long getId() {
 		return id;
@@ -93,6 +98,20 @@ public class OperacionCuenta {
 	public void setCuentaBancaria(CuentaBancaria cuentaBancaria) {
 		this.cuentaBancaria = cuentaBancaria;
 	}
+
+
+
+	public String getDescripcion() {
+		return descripcion;
+	}
+
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	
 	
 	
 }
