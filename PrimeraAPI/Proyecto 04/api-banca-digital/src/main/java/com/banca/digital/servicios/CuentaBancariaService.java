@@ -2,6 +2,7 @@ package com.banca.digital.servicios;
 
 import java.util.List;
 
+import com.banca.digital.dto.ClienteDTO;
 import com.banca.digital.entidades.Cliente;
 import com.banca.digital.entidades.CuentaActual;
 import com.banca.digital.entidades.CuentaAhorro;
@@ -18,7 +19,7 @@ public interface CuentaBancariaService {
 	
 	CuentaAhorro saveCuentaBancariaAhorro(double balanceInicial, double tasaInteres, Long clienteId) throws ClienteNotFoundExcepcton;
 	
-	List<Cliente> listClientes();
+	List<ClienteDTO> listClientes();
 	
 	CuentaBancaria getCuentaBancaria(String cuentaId) throws CuentaBancariaNotFoundException;
 
