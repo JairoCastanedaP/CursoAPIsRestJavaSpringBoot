@@ -13,9 +13,13 @@ import com.banca.digital.excepciones.CuentaBancariaNotFoundException;
 
 public interface CuentaBancariaService {
 
-	Cliente saveCliente(ClienteDTO clienteDTO);
+	ClienteDTO saveCliente(ClienteDTO clienteDTO);
 	
 	ClienteDTO getCliente(Long clienteId) throws ClienteNotFoundExcepcton;
+	
+	ClienteDTO updateCliente(ClienteDTO clienteId);
+	
+	void deleteCliente(Long clienteId);
 	
 	
 	CuentaActual saveCuentaBancariaActual(double balanceInicial, double sobregiro, Long clienteId) throws ClienteNotFoundExcepcton;

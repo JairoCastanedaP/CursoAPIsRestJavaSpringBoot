@@ -51,7 +51,7 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 	private CuentaBancariaMapperImpl cuenBancariaMapperImpl;
 	
 	@Override
-	public Cliente saveCliente(ClienteDTO clienteDTO) {
+	public ClienteDTO saveCliente(ClienteDTO clienteDTO) {
 		
 		logger.debug("Guardando un nuevo cliente");
 		Cliente cliente = cuenBancariaMapperImpl.mappeerDeClienteDTO(clienteDTO);
@@ -175,6 +175,20 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 		.orElseThrow(() -> new ClienteNotFoundExcepcton("Cliente no encontrado"));
 
 		return cuenBancariaMapperImpl.mappeerDeCliente(cliente);
+	}
+
+	@Override
+	public ClienteDTO updateCliente(ClienteDTO clienteDTO) {
+		logger.debug("Actualizando cliente");
+		Cliente cliente = cuenBancariaMapperImpl.mappeerDeClienteDTO(clienteDTO);
+		Cliente clienteBBDD = clienteRepository.save(cliente);
+		return cuenBancariaMapperImpl.mappeerDeCliente(clienteBBDD);
+	}
+
+	@Override
+	public void deleteCliente(Long clienteId) {
+		clienteRepository.deleteById(clienteId);
+		
 	}
 
 }

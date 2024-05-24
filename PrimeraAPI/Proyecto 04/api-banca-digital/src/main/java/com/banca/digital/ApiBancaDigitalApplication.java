@@ -12,6 +12,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.banca.digital.dto.ClienteDTO;
 import com.banca.digital.entidades.Cliente;
 import com.banca.digital.entidades.CuentaActual;
 import com.banca.digital.entidades.CuentaAhorro;
@@ -42,7 +43,7 @@ public class ApiBancaDigitalApplication {
 	CommandLineRunner start(CuentaBancariaService cuentaBancariaService) {
 		return args->{
 			Stream.of("Christian","Julen", "pedro","Leo").forEach(nombre-> {
-				Cliente cliente = new Cliente();
+				ClienteDTO cliente = new ClienteDTO();
 				cliente.setNombre(nombre);
 				cliente.setEmail(nombre+"@gmail.com");
 				cuentaBancariaService.saveCliente(cliente);
