@@ -15,6 +15,7 @@ import com.banca.digital.dto.ClienteDTO;
 import com.banca.digital.dto.CuentaActualDTO;
 import com.banca.digital.dto.CuentaAhorroDTO;
 import com.banca.digital.dto.CuentaBancariaDTO;
+import com.banca.digital.dto.OperacionCuentaDTO;
 import com.banca.digital.entidades.Cliente;
 import com.banca.digital.entidades.CuentaActual;
 import com.banca.digital.entidades.CuentaAhorro;
@@ -216,6 +217,15 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 	public void deleteCliente(Long clienteId) {
 		clienteRepository.deleteById(clienteId);
 		
+	}
+
+	@Override
+	public List<OperacionCuentaDTO> listHistorialDeLaCuenta(String cuentaId) {
+		
+		List<OperacionCuenta> operacionesDeCuenta = operacionCuentaRespository.findByCuentaBancaria(cuentaId);
+		return operacionesDeCuenta.stream().map(operacionCuenta ->
+			cuenBancariaMapperImpl.mapperDeOperacionCuenta(operacionCuenta)
+		).collect(Collectors.toList());
 	}
 
 }

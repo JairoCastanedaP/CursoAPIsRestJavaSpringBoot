@@ -6,6 +6,7 @@ import com.banca.digital.dto.ClienteDTO;
 import com.banca.digital.dto.CuentaActualDTO;
 import com.banca.digital.dto.CuentaAhorroDTO;
 import com.banca.digital.dto.CuentaBancariaDTO;
+import com.banca.digital.dto.OperacionCuentaDTO;
 import com.banca.digital.entidades.Cliente;
 import com.banca.digital.entidades.CuentaActual;
 import com.banca.digital.entidades.CuentaAhorro;
@@ -40,5 +41,7 @@ public interface CuentaBancariaService {
 	void transfer(String cuentaIdPropietario, String cuentaIdDestinatario, double monto) throws CuentaBancariaNotFoundException, BalanceInsuficienteException;
 	
 	List<CuentaBancariaDTO> listCuentasBancarias();
+	
+	List<OperacionCuentaDTO> listHistorialDeLaCuenta(String cuentaId);
 	
 }

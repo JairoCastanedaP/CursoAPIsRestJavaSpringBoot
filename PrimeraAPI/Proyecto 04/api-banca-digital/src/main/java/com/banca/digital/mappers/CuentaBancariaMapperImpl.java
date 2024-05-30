@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 import com.banca.digital.dto.ClienteDTO;
 import com.banca.digital.dto.CuentaActualDTO;
 import com.banca.digital.dto.CuentaAhorroDTO;
+import com.banca.digital.dto.OperacionCuentaDTO;
 import com.banca.digital.entidades.Cliente;
 import com.banca.digital.entidades.CuentaActual;
 import com.banca.digital.entidades.CuentaAhorro;
+import com.banca.digital.entidades.OperacionCuenta;
 
 @Service
 public class CuentaBancariaMapperImpl {
@@ -56,4 +58,9 @@ public class CuentaBancariaMapperImpl {
 		return cuentaActual;
 	}
 	
+	public OperacionCuentaDTO mapperDeOperacionCuenta(OperacionCuenta operacionCuenta) {
+		OperacionCuentaDTO operacionCuentaDTO= new OperacionCuentaDTO();
+		BeanUtils.copyProperties(operacionCuenta, operacionCuentaDTO);
+		return operacionCuentaDTO;
+	}
 }

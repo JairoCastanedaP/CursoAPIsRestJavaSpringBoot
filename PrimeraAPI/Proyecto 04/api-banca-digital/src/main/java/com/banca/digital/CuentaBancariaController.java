@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.banca.digital.dto.CuentaBancariaDTO;
+import com.banca.digital.dto.OperacionCuentaDTO;
 import com.banca.digital.excepciones.CuentaBancariaNotFoundException;
 import com.banca.digital.servicios.CuentaBancariaService;
 
@@ -20,7 +21,7 @@ public class CuentaBancariaController {
 	private CuentaBancariaService cuentaBancariaService;
 
 	@GetMapping("/cuentas/{cuentaId}")
-	public CuentaBancariaDTO listarDatpsDeUnaCuentaBancaria(@PathVariable String cuentaId) throws CuentaBancariaNotFoundException {
+	public CuentaBancariaDTO listarDatosDeUnaCuentaBancaria(@PathVariable String cuentaId) throws CuentaBancariaNotFoundException {
 		
 		return cuentaBancariaService.getCuentaBancaria(cuentaId);
 	}
@@ -28,5 +29,9 @@ public class CuentaBancariaController {
 	@GetMapping("/cuentas")
 	public List<CuentaBancariaDTO> listarCuentasBancarias(){
 		return cuentaBancariaService.listCuentasBancarias();
+	}
+	@GetMapping("/cuentas/{cuentaId}/operaciones")
+	public List<OperacionCuentaDTO> listarHistorialDeCuentas(@PathVariable String cuentaId){
+		return cuentaBancariaService.listHistorialDeLaCuenta(cuentaId);
 	}
 }
