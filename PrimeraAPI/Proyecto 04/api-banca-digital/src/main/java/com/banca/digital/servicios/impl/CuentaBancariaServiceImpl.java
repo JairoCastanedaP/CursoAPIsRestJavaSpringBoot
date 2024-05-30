@@ -9,12 +9,15 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.banca.digital.dto.ClienteDTO;
 import com.banca.digital.dto.CuentaActualDTO;
 import com.banca.digital.dto.CuentaAhorroDTO;
 import com.banca.digital.dto.CuentaBancariaDTO;
+import com.banca.digital.dto.HistorialCuentaDTO;
 import com.banca.digital.dto.OperacionCuentaDTO;
 import com.banca.digital.entidades.Cliente;
 import com.banca.digital.entidades.CuentaActual;
@@ -226,6 +229,27 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 		return operacionesDeCuenta.stream().map(operacionCuenta ->
 			cuenBancariaMapperImpl.mapperDeOperacionCuenta(operacionCuenta)
 		).collect(Collectors.toList());
+	}
+
+	@Override
+	public HistorialCuentaDTO getHistorialCuenta(String cuentaId, int page, int size) throws CuentaBancariaNotFoundException {
+		CuentaBancaria cuentaBancaria= cuentaBancariaRespository.findById(cuentaId).orElse(null);
+		if(cuentaBancaria ==null) {
+			throw new CuentaBancariaNotFoundException("Cuenta no encontrada");
+			
+		}
+		Page<OperacionCuenta> operacionesCuenta= operacionCuentaRespository.findByCuentaBancaria(cuentaId, PageRequest.of(page, size));
+		HistorialCuentaDTO historialCuentaDTO= new HistorialCuentaDTO();
+		List<OperacionCuentaDTO> operacionesCuentaDTOS = operacionesCuenta.getContent().stream().map(operacionCuenta ->
+		cuenBancariaMapperImpl.mapperDeOperacionCuenta(operacionCuenta)).collect(Collectors.toList());
+		historialCuentaDTO.setOperacionesCuentaDTOS(operacionesCuentaDTOS);
+		historialCuentaDTO.setCuentaId(cuentaBancaria.getId());
+		historialCuentaDTO.setBalance(cuentaBancaria.getBalance());
+		historialCuentaDTO.setCurrentPage(page);
+		historialCuentaDTO.setPageSize(size);
+		historialCuentaDTO.setTotalPages(operacionesCuenta.getTotalPages());
+		return historialCuentaDTO;
+		
 	}
 
 }
