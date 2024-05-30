@@ -13,6 +13,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.banca.digital.dto.ClienteDTO;
+import com.banca.digital.dto.CuentaActualDTO;
+import com.banca.digital.dto.CuentaAhorroDTO;
+import com.banca.digital.dto.CuentaBancariaDTO;
 import com.banca.digital.entidades.Cliente;
 import com.banca.digital.entidades.CuentaActual;
 import com.banca.digital.entidades.CuentaAhorro;
@@ -39,6 +42,7 @@ public class ApiBancaDigitalApplication {
 			bancoService.consultar();
 		};
 	}
+	
 	//@Bean
 	CommandLineRunner start(CuentaBancariaService cuentaBancariaService) {
 		return args->{
@@ -56,12 +60,20 @@ public class ApiBancaDigitalApplication {
 					cuentaBancariaService.saveCuentaBancariaActual(Math.random()*90000, 9000, cliente.getId());
 					cuentaBancariaService.saveCuentaBancariaAhorro(120000, 5.5, cliente.getId());
 					
-					List<CuentaBancaria> cuentasBancarias= cuentaBancariaService.listCuentasBancarias();
+					List<CuentaBancariaDTO> cuentasBancarias= cuentaBancariaService.listCuentasBancarias();
 					
-					for(CuentaBancaria cuentaBancaria : cuentasBancarias) {
+					for(CuentaBancariaDTO cuentaBancaria : cuentasBancarias) {
 						for(int i=0;i<10;i++) {
-							cuentaBancariaService.credit(cuentaBancaria.getId(), 10000+Math.random()*120000, "Credito");
-							cuentaBancariaService.debit(cuentaBancaria.getId(), 1000+Math.random()*9000, "Debito");
+							String cuentaId;
+							
+							if(cuentaBancaria instanceof CuentaBancariaDTO) {
+								cuentaId = ((CuentaAhorroDTO)cuentaBancaria).getId();
+							}
+							else {
+								cuentaId = ((CuentaActualDTO)cuentaBancaria).getId();
+							}
+							cuentaBancariaService.credit(cuentaId, 10000+Math.random()*120000, "Credito");
+							cuentaBancariaService.debit(cuentaId, 1000+Math.random()*9000, "Debito");
 						}
 					}
 				}catch(Exception e) {
