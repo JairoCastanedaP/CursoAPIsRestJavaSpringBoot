@@ -10,8 +10,9 @@ import org.springframework.stereotype.Repository;
 import com.banca.digital.entidades.OperacionCuenta;
 
 @Repository
-public interface OperacionCuentaRespository extends JpaRepository<OperacionCuenta, Long>{
-
+public interface OperacionCuentaRespository extends JpaRepository<OperacionCuenta, String>{
 	List<OperacionCuenta> findByCuentaBancaria(String cuentaId);
 	Page<OperacionCuenta> findByCuentaBancaria(String cuentaId, Pageable pageable);
+	Page<OperacionCuenta> finByCuentaBancariaIdOrderByFechaOperacionDesc(String cuentaId, Pageable pageable);
+	
 }

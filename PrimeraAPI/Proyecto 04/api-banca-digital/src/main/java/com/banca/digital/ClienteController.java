@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,4 +50,11 @@ public class ClienteController {
 	public void eliminarCliente(@PathVariable Long id) {
 		cuentaBancariaService.deleteCliente(id);
 	}
+	
+	@GetMapping("clientes/search")
+	public  List<ClienteDTO> buscarClientes(@RequestParam(name= "keyword", defaultValue = "") String keyword){
+		return cuentaBancariaService.searchClientes("%"+ keyword+"%");
+		
+	}
+	
 }

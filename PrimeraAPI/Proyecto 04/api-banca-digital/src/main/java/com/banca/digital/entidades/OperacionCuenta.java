@@ -25,8 +25,10 @@ import lombok.NoArgsConstructor;
 public class OperacionCuenta {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	/*@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;*/
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private String id;
 	
 	private Date fechaOperacion;
 	
@@ -46,7 +48,7 @@ public class OperacionCuenta {
 
 	
 
-	public OperacionCuenta(Long id, Date fechaOperacion, double monto, TipoOperacion tipoOperacion,
+	public OperacionCuenta(String id, Date fechaOperacion, double monto, TipoOperacion tipoOperacion,
 			CuentaBancaria cuentaBancaria, String descripcion) {
 		super();
 		this.id = id;
@@ -59,11 +61,11 @@ public class OperacionCuenta {
 
 
 
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

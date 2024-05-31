@@ -1,0 +1,41 @@
+package com.banca.digital.dto;
+
+import lombok.Data;
+
+@Data
+public class TransferenciaRequestDTO {
+
+	private String cuentaPropietario;
+	private String cuentaDestinatario;
+	private double monto;
+	private String descripcion;
+	public TransferenciaRequestDTO() {
+		super();
+	}
+	public String getCuentaPropietario() {
+		return cuentaPropietario;
+	}
+	public void setCuentaPropietario(String cuentaPropietario) {
+		this.cuentaPropietario = cuentaPropietario;
+	}
+	public String getCuentaDestinatario() {
+		return cuentaDestinatario;
+	}
+	public void setCuentaDestinatario(String cuentaDestinatario) {
+		this.cuentaDestinatario = cuentaDestinatario;
+	}
+	public double getMonto() {
+		return monto;
+	}
+	public void setMonto(double monto) {
+		this.monto = monto;
+	}
+	public String getDescripcion() {
+		return descripcion;
+	}
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+	
+	
+}

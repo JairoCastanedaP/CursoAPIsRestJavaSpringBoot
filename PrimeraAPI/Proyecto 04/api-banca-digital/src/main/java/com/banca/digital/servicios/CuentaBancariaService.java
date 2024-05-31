@@ -24,6 +24,8 @@ public interface CuentaBancariaService {
 	
 	ClienteDTO updateCliente(ClienteDTO clienteId);
 	
+	List<ClienteDTO> searchClientes(String keyword);
+	
 	void deleteCliente(Long clienteId);
 	
 	

@@ -238,7 +238,7 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 			throw new CuentaBancariaNotFoundException("Cuenta no encontrada");
 			
 		}
-		Page<OperacionCuenta> operacionesCuenta= operacionCuentaRespository.findByCuentaBancaria(cuentaId, PageRequest.of(page, size));
+		Page<OperacionCuenta> operacionesCuenta= operacionCuentaRespository.finByCuentaBancariaIdOrderByFechaOperacionDesc(cuentaId, PageRequest.of(page, size));
 		HistorialCuentaDTO historialCuentaDTO= new HistorialCuentaDTO();
 		List<OperacionCuentaDTO> operacionesCuentaDTOS = operacionesCuenta.getContent().stream().map(operacionCuenta ->
 		cuenBancariaMapperImpl.mapperDeOperacionCuenta(operacionCuenta)).collect(Collectors.toList());
@@ -250,6 +250,13 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 		historialCuentaDTO.setTotalPages(operacionesCuenta.getTotalPages());
 		return historialCuentaDTO;
 		
+	}
+
+	@Override
+	public List<ClienteDTO> searchClientes(String keyword) {
+		List<Cliente> clientes = clienteRepository.searchClientes(keyword);
+		List<ClienteDTO> clientesDTOS = (List<ClienteDTO>) clientes.stream().map(cliente -> cuenBancariaMapperImpl.mappeerDeCliente(cliente));
+		return clientesDTOS;
 	}
 
 }
