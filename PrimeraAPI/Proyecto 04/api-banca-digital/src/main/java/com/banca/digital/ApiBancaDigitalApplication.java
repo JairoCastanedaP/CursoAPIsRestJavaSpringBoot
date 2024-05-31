@@ -26,7 +26,7 @@ import com.banca.digital.enums.TipoOperacion;
 import com.banca.digital.excepciones.ClienteNotFoundExcepcton;
 import com.banca.digital.repositorios.ClienteRepository;
 import com.banca.digital.repositorios.CuentaBancariaRespository;
-import com.banca.digital.repositorios.OperacionCuentaRespository;
+import com.banca.digital.repositorios.OperacionCuentaRepository;
 import com.banca.digital.servicios.BancoService;
 import com.banca.digital.servicios.CuentaBancariaService;
 

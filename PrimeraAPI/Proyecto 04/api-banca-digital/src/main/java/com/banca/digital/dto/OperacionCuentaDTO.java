@@ -9,11 +9,11 @@ import lombok.Data;
 @Data
 public class OperacionCuentaDTO {
 
-	private Long id;
-	private Date fechaOperacion;
-	private double monto;
-	private TipoOperacion tipoOperacion;
-	private String descripcion;
+	  private Long id;
+	    private Date fechaOperacion;
+	    private double monto;
+	    private TipoOperacion tipoOperacion;
+	    private String descripcion;
 	
 	public OperacionCuentaDTO() {
 

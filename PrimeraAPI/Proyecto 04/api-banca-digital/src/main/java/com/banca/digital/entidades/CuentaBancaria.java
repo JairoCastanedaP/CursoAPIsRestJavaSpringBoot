@@ -30,19 +30,19 @@ import lombok.NoArgsConstructor;
 public class CuentaBancaria {
 
 	@Id
-	private String id;
-	
-	private double balance;
-	private Date fechaCreacion;
-	
-	@Enumerated(EnumType.STRING)
-	private EstadoCuenta estadoCuenta;
-	
-	@ManyToOne
-	private Cliente cliente;
-	
-	@OneToMany(mappedBy = "cuentaBancaria", fetch = FetchType.LAZY)
-	private List<OperacionCuenta> operacionCuenta;
+    private String id;
+
+    private double balance;
+    private Date fechaCreacion;
+
+    @Enumerated(EnumType.STRING)
+    private EstadoCuenta estadoCuenta;
+
+    @ManyToOne
+    private Cliente cliente;
+
+    @OneToMany(mappedBy = "cuentaBancaria",fetch = FetchType.LAZY)
+    private List<OperacionCuenta> operacionesCuenta;
 
 	public CuentaBancaria() {
 		super();
@@ -56,7 +56,7 @@ public class CuentaBancaria {
 		this.fechaCreacion = fechaCreacion;
 		this.estadoCuenta = estadoCuenta;
 		this.cliente = cliente;
-		this.operacionCuenta = operacionCuenta;
+		this.operacionesCuenta = operacionCuenta;
 	}
 
 	public String getId() {
@@ -100,11 +100,11 @@ public class CuentaBancaria {
 	}
 
 	public List<OperacionCuenta> getOperacionCuenta() {
-		return operacionCuenta;
+		return operacionesCuenta;
 	}
 
 	public void setOperacionCuenta(List<OperacionCuenta> operacionCuenta) {
-		this.operacionCuenta = operacionCuenta;
+		this.operacionesCuenta = operacionCuenta;
 	}
 	
 	

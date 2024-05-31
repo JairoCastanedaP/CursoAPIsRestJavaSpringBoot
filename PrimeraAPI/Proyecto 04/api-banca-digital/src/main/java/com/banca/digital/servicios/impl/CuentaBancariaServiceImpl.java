@@ -31,7 +31,7 @@ import com.banca.digital.excepciones.CuentaBancariaNotFoundException;
 import com.banca.digital.mappers.CuentaBancariaMapperImpl;
 import com.banca.digital.repositorios.ClienteRepository;
 import com.banca.digital.repositorios.CuentaBancariaRespository;
-import com.banca.digital.repositorios.OperacionCuentaRespository;
+import com.banca.digital.repositorios.OperacionCuentaRepository;
 import com.banca.digital.servicios.CuentaBancariaService;
 
 import jakarta.transaction.Transactional;
@@ -53,7 +53,7 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 	private CuentaBancariaRespository cuentaBancariaRespository;
 	
 	@Autowired
-	private OperacionCuentaRespository operacionCuentaRespository;
+	private OperacionCuentaRepository operacionCuentaRespository;
 	
 	@Autowired
 	private CuentaBancariaMapperImpl cuenBancariaMapperImpl;
@@ -222,35 +222,33 @@ public class CuentaBancariaServiceImpl implements CuentaBancariaService{
 		
 	}
 
-	@Override
-	public List<OperacionCuentaDTO> listHistorialDeLaCuenta(String cuentaId) {
-		
-		List<OperacionCuenta> operacionesDeCuenta = operacionCuentaRespository.findByCuentaBancaria(cuentaId);
-		return operacionesDeCuenta.stream().map(operacionCuenta ->
-			cuenBancariaMapperImpl.mapperDeOperacionCuenta(operacionCuenta)
-		).collect(Collectors.toList());
-	}
+	 @Override
+	    public List<OperacionCuentaDTO> listHistorialDeLaCuenta(String cuentaId) {
+	        List<OperacionCuenta> operacionesDeCuenta = operacionCuentaRespository.findByCuentaBancariaId(cuentaId);
+	        return operacionesDeCuenta.stream().map(operacionCuenta ->
+	        cuenBancariaMapperImpl.mapperDeOperacionCuenta(operacionCuenta)
+	        ).collect(Collectors.toList());
+	    }
 
-	@Override
-	public HistorialCuentaDTO getHistorialCuenta(String cuentaId, int page, int size) throws CuentaBancariaNotFoundException {
-		CuentaBancaria cuentaBancaria= cuentaBancariaRespository.findById(cuentaId).orElse(null);
-		if(cuentaBancaria ==null) {
-			throw new CuentaBancariaNotFoundException("Cuenta no encontrada");
-			
-		}
-		Page<OperacionCuenta> operacionesCuenta= operacionCuentaRespository.finByCuentaBancariaIdOrderByFechaOperacionDesc(cuentaId, PageRequest.of(page, size));
-		HistorialCuentaDTO historialCuentaDTO= new HistorialCuentaDTO();
-		List<OperacionCuentaDTO> operacionesCuentaDTOS = operacionesCuenta.getContent().stream().map(operacionCuenta ->
-		cuenBancariaMapperImpl.mapperDeOperacionCuenta(operacionCuenta)).collect(Collectors.toList());
-		historialCuentaDTO.setOperacionesCuentaDTOS(operacionesCuentaDTOS);
-		historialCuentaDTO.setCuentaId(cuentaBancaria.getId());
-		historialCuentaDTO.setBalance(cuentaBancaria.getBalance());
-		historialCuentaDTO.setCurrentPage(page);
-		historialCuentaDTO.setPageSize(size);
-		historialCuentaDTO.setTotalPages(operacionesCuenta.getTotalPages());
-		return historialCuentaDTO;
-		
-	}
+	 @Override
+	    public HistorialCuentaDTO getHistorialCuenta(String cuentaId, int page, int size) throws CuentaBancariaNotFoundException {
+	        CuentaBancaria cuentaBancaria = cuentaBancariaRespository.findById(cuentaId).orElse(null);
+
+	        if(cuentaBancaria == null){
+	            throw new CuentaBancariaNotFoundException("Cuenta no encontrada");
+	        }
+
+	        Page<OperacionCuenta> operacionesCuenta = operacionCuentaRespository.findByCuentaBancariaIdOrderByFechaOperacionDesc(cuentaId, PageRequest.of(page, size));
+	        HistorialCuentaDTO historialCuentaDTO = new HistorialCuentaDTO();
+	        List<OperacionCuentaDTO> operacionesCuentaDTOS = operacionesCuenta.getContent().stream().map(operacionCuenta -> cuenBancariaMapperImpl.mapperDeOperacionCuenta(operacionCuenta)).collect(Collectors.toList());
+	        historialCuentaDTO.setOperacionesCuentaDTOS(operacionesCuentaDTOS);
+	        historialCuentaDTO.setCuentaId(cuentaBancaria.getId());
+	        historialCuentaDTO.setBalance(cuentaBancaria.getBalance());
+	        historialCuentaDTO.setCurrentPage(page);
+	        historialCuentaDTO.setPageSize(size);
+	        historialCuentaDTO.setTotalPages(operacionesCuenta.getTotalPages());
+	        return historialCuentaDTO;
+	    }
 
 	@Override
 	public List<ClienteDTO> searchClientes(String keyword) {

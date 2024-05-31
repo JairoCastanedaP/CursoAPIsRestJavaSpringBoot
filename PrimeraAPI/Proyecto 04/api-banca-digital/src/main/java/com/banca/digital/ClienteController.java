@@ -24,37 +24,36 @@ import com.banca.digital.servicios.CuentaBancariaService;
 public class ClienteController {
 	
 	@Autowired
-	private CuentaBancariaService cuentaBancariaService;
+    private CuentaBancariaService cuentaBancariaService;
 
-	@GetMapping("/clientes")
-	public List<ClienteDTO> listarClientes(){
-		return cuentaBancariaService.listClientes();
-	}
-	
-	@GetMapping("/clientes/{id}")
-	public ClienteDTO listarDatosDelCliente(@PathVariable(name= "id") Long clienteId) throws ClienteNotFoundExcepcton{
-		return cuentaBancariaService.getCliente(clienteId);
-	}
-	
-	@PostMapping("/clientes")
-	public ClienteDTO guardarCliente(@RequestBody ClienteDTO clienteDTO) {
-		return cuentaBancariaService.saveCliente(clienteDTO);
-	}
-	@PutMapping("/clientes/{clienteId}")
-	public ClienteDTO actualizarCliente(@PathVariable Long clienteId, @RequestBody ClienteDTO clienteDTO) {
-		clienteDTO.setId(clienteId);
-		return cuentaBancariaService.updateCliente(clienteDTO);
-	}
-	
-	@DeleteMapping("/clientes/{id}")
-	public void eliminarCliente(@PathVariable Long id) {
-		cuentaBancariaService.deleteCliente(id);
-	}
-	
-	@GetMapping("clientes/search")
-	public  List<ClienteDTO> buscarClientes(@RequestParam(name= "keyword", defaultValue = "") String keyword){
-		return cuentaBancariaService.searchClientes("%"+ keyword+"%");
-		
-	}
-	
+    @GetMapping("/clientes")
+    public List<ClienteDTO> listarClientes(){
+        return cuentaBancariaService.listClientes();
+    }
+
+    @GetMapping("/clientes/{id}")
+    public ClienteDTO listarDatosDelCliente(@PathVariable(name = "id") Long clienteId) throws ClienteNotFoundExcepcton {
+        return cuentaBancariaService.getCliente(clienteId);
+    }
+
+    @PostMapping("/clientes")
+    public ClienteDTO guardarCliente(@RequestBody ClienteDTO clienteDTO){
+        return cuentaBancariaService.saveCliente(clienteDTO);
+    }
+
+    @PutMapping("/clientes/{clienteId}")
+    public ClienteDTO actualizarCliente(@PathVariable Long clienteId,@RequestBody ClienteDTO clienteDTO){
+        clienteDTO.setId(clienteId);
+        return cuentaBancariaService.updateCliente(clienteDTO);
+    }
+
+    @DeleteMapping("/clientes/{id}")
+    public void eliminarCliente(@PathVariable Long id){
+        cuentaBancariaService.deleteCliente(id);
+    }
+
+    @GetMapping("/clientes/search")
+    public List<ClienteDTO> buscarClientes(@RequestParam(name = "keyword",defaultValue = "") String keyword){
+        return cuentaBancariaService.searchClientes("%"+keyword+"%");
+    }
 }

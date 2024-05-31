@@ -25,22 +25,20 @@ import lombok.NoArgsConstructor;
 public class OperacionCuenta {
 
 	@Id
-	/*@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;*/
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private String id;
-	
-	private Date fechaOperacion;
-	
-	private double monto;
-	
-	@Enumerated(EnumType.STRING)
-	private TipoOperacion tipoOperacion;
-	
-	@ManyToOne
-	private CuentaBancaria cuentaBancaria;
-	
-	private String descripcion;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private Date fechaOperacion;
+
+    private double monto;
+
+    @Enumerated(EnumType.STRING)
+    private TipoOperacion tipoOperacion;
+
+    @ManyToOne
+    private CuentaBancaria cuentaBancaria;
+
+    private String descripcion;
 
 	public OperacionCuenta() {
 		super();
@@ -48,7 +46,7 @@ public class OperacionCuenta {
 
 	
 
-	public OperacionCuenta(String id, Date fechaOperacion, double monto, TipoOperacion tipoOperacion,
+	public OperacionCuenta(Long id, Date fechaOperacion, double monto, TipoOperacion tipoOperacion,
 			CuentaBancaria cuentaBancaria, String descripcion) {
 		super();
 		this.id = id;
@@ -61,11 +59,11 @@ public class OperacionCuenta {
 
 
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
