@@ -59,6 +59,7 @@ public class CuentaBancaria {
 		this.operacionesCuenta = operacionCuenta;
 	}
 
+	
 	public String getId() {
 		return id;
 	}

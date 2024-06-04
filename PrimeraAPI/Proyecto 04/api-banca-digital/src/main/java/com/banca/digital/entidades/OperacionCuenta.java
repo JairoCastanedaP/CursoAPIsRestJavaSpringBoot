@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 
 
 
+
 public class OperacionCuenta {
 
 	@Id
