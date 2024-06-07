@@ -26,6 +26,20 @@ public class JwtUtil {
     En este método, se inicializa la clave secreta que se utilizará para firmar y verificar los
     tokens JWT. Se genera una clave aleatoria utilizando SecureRandom() y se asigna a la variable secret.
     */
+    
+    /*
+     * TOKEN
+     * PARTES DEL TOKEN:
+     * 1. HEADER: PRESENTA 2 VALORES, ALGORITMO DEL TOKEN Y EL TIPO DEL TOKEN {"algoritmo","tipo"}
+     * 2. PAYLOAD: INFORMACIÓN DEL TOKEN, USUARIO, FECHA DE CADUCIDAD DEL TOKEN, DATA ADICONALM... 
+     * 	  {"NAME";"JOSE","FECHACADUCIDAD"...}
+     * 3. SIGNATURE: CON EL TOKEN PUEDE ACCEDER A LAS RUTAS, LA CLAVE SECRETA SOLO LA CONOCEN LOS SERVIDORES, CON LA CLAVE SE OBTIENE OBTENER LA FIRMA
+     * 	PARA PODER VERIFICAR QUE EL REMITENTE ES QUIEN DICE SER.
+     * 
+     * 		TIPOS DE CLAVES:
+     * 		1. PUBLICA:	SOLO SE UTILIZA PARA VALIDAR TOKEN
+     * 		2.PRIVADA: SOLO LA CONOCE EL EMISOR, PARA FIRMAR TOKEN
+     * */
     @PostConstruct
     protected void init(){
         byte[] apiKeySecretBytes = new byte[64]; // 512 bits
