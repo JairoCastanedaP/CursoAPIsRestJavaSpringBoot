@@ -20,6 +20,7 @@ public class CategoriaController {
     @Autowired
     private CategoriaService categoriaService;
 
+    
     @PostMapping("/add")
     public ResponseEntity<String> agregarNuevaCategoria(@RequestBody(required = true)Map<String,String> requestMap){
         try{

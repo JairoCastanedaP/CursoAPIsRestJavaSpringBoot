@@ -28,6 +28,7 @@ public class CategoriaServiceImpl implements CategoriaService {
     @Autowired
     private JwtFilter jwtFilter;
 
+    
     @Override
     public ResponseEntity<String> addNuevaCategoria(Map<String, String> requestMap) {
         try{
