@@ -42,9 +42,10 @@ public class JwtFilter extends OncePerRequestFilter {
                 username = jwtUtil.extractUsername(token);
                 claims = jwtUtil.extractAllClaims(token);
             }
-
+            // si aun no se ha autenticado el usuario
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
                 UserDetails userDetails = customerDetailsService.loadUserByUsername(username);
+                //si se valida el token, se crea la autenticación.
                 if(jwtUtil.validateToken(token,userDetails)){
                     UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                             new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());

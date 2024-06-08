@@ -21,6 +21,7 @@ public class CustomerDetailsService implements UserDetailsService {
 
     private User userDetail;
 
+    //metodo para cargar el usuario
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //log.info("Dentro de loadUserByUsername {}",username);
