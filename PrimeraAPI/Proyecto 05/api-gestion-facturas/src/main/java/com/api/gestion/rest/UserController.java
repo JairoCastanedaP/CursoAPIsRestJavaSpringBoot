@@ -62,6 +62,7 @@ public class UserController {
         return FacturaUtils.getResponseEntity(FacturaConstantes.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    
     @GetMapping("/checkToken")
     public ResponseEntity<String> validarToken(){
         try {
