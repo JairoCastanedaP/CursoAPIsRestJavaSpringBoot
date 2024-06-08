@@ -61,6 +61,7 @@ public class ProductoController {
         return FacturaUtils.getResponseEntity(FacturaConstantes.SOMETHING_WENT_WRONG, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    
     @PostMapping("/updateStatus")
     public ResponseEntity<String> actualizarStatus(@RequestBody Map<String,String> requestMap){
         try{
