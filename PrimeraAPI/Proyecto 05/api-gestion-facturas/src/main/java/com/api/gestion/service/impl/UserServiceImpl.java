@@ -82,7 +82,7 @@ public class UserServiceImpl implements UserService {
             Authentication authentication = authenticationManager.authenticate(
               new UsernamePasswordAuthenticationToken(requestMap.get("email"),requestMap.get("password"))
             );
-
+            
             if(authentication.isAuthenticated()){
               if(customerDetailsService.getUserDetail().getStatus().equalsIgnoreCase("true")){
                   return new ResponseEntity<String>(
