@@ -41,6 +41,7 @@ public class UserController {
         return FacturaUtils.getResponseEntity(FacturaConstantes.SOMETHING_WENT_WRONG,HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    //
     @GetMapping("/get")
     public ResponseEntity<List<UserWrapper>> listarUsuarios(){
         try{
