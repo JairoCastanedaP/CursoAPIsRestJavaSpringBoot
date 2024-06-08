@@ -22,15 +22,18 @@ public class SecurityConfig {
     @Autowired
     private JwtFilter jwtFilter;
 
+    //
     @Bean
     public PasswordEncoder passwordEncoder(){
         //return NoOpPasswordEncoder.getInstance();
         return new BCryptPasswordEncoder();
     }
 
+    //Se registran las rutas
     @Bean
     protected SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
+        //Se controla la vulnerabilidad CROSS SITE REQUEST FORGERY
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(request -> {
                 request.requestMatchers("/user/login","/user/signup","/user/forgotPassword")
@@ -43,6 +46,7 @@ public class SecurityConfig {
         return httpSecurity.build();
     }
 
+    //Validación del acceso a las Rutas
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
         return authenticationConfiguration.getAuthenticationManager();
