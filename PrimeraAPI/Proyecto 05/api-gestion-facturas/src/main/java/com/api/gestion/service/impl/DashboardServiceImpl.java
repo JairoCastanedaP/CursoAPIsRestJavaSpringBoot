@@ -15,6 +15,7 @@ import java.util.Map;
 @Service
 public class DashboardServiceImpl implements DashboardService {
 
+	
     @Autowired
     private ProductoDAO productoDAO;
 
