@@ -15,6 +15,7 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name = "facturas")
 public class Factura {
 
+	
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

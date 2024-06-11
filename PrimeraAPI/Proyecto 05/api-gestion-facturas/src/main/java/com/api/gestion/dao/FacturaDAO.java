@@ -10,6 +10,7 @@ import java.util.List;
 @Repository
 public interface FacturaDAO extends JpaRepository<Factura,Integer> {
 
+	
     List<Factura> getFacturas();
 
     List<Factura> getFacturaByUsername(@Param("username") String username);

@@ -34,6 +34,7 @@ public class FacturaServiceImpl implements FacturaService {
 
     @Autowired
     private FacturaDAO facturaDAO;
+    
 
     @Override
     public ResponseEntity<String> generateReport(Map<String, Object> requestMap) {

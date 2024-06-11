@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface FacturaService{
+	
 
     ResponseEntity<String> generateReport(Map<String,Object> requestMap);
 

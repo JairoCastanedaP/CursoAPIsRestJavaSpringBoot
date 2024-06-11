@@ -19,6 +19,7 @@ public class FacturaUtils {
 
     private FacturaUtils(){
 
+    	
     }
 
     public static ResponseEntity<String> getResponseEntity(String message, HttpStatus httpStatus){
