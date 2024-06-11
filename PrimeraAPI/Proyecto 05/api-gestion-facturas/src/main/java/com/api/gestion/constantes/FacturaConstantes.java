@@ -8,5 +8,5 @@ public class FacturaConstantes {
 
     public static final String UNAUTHORIZED_ACCESS = "Acceso no autorizado";
 
-    public static final String STORE_LOCATION = "C:\\LocationPDFs";
+    public static final String STORE_LOCATION = "C:\\Users\\Hp\\Desktop\\LocalFiles\\CursoApiRestJavaSpringBoot\\PrimeraAPI\\Proyecto 05\\api-gestion-facturas\\LocationPDFs";
 }
