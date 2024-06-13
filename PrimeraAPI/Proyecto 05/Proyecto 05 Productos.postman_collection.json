@@ -1,0 +1,568 @@
+{
+	"info": {
+		"_postman_id": "754a6030-e089-42f7-80f5-92a0b8837b06",
+		"name": "Proyecto 05 Productos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Categoria",
+			"item": [
+				{
+					"name": "Agregar Categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4Mjc4ODcsImV4cCI6MTcxNzgzMTQ4N30.xvh2tX9ZlMnkS2pDDl6nMUjojKVnmX9Z5HuhelFjaK1lpzbdtWtaVC5vkc8np7b5TDci4bsrE-thnulL8tgIEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Electronicos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/categoria/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"categoria",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4Mjg4MzAsImV4cCI6MTcxNzgzMjQzMH0.UpRpT8cZ_OeLSkBvwZiGKAkTjyJzmCPzsmqNh--OKVbbcMrSHnrXSB353sCm8c1Cjh1OfyXSJzJ_sjGJHU72Sg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":1,\r\n    \"nombre\":\"batidos\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/categoria/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"categoria",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Categorias",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4Mjc4ODcsImV4cCI6MTcxNzgzMTQ4N30.xvh2tX9ZlMnkS2pDDl6nMUjojKVnmX9Z5HuhelFjaK1lpzbdtWtaVC5vkc8np7b5TDci4bsrE-thnulL8tgIEA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/categoria/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"categoria",
+								"get"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Productos",
+			"item": [
+				{
+					"name": "Agregar producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4Mjg4MzAsImV4cCI6MTcxNzgzMjQzMH0.UpRpT8cZ_OeLSkBvwZiGKAkTjyJzmCPzsmqNh--OKVbbcMrSHnrXSB353sCm8c1Cjh1OfyXSJzJ_sjGJHU72Sg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"multimetro\",\r\n    \"categoriaId\": \"2\",\r\n    \"descripcion\": \"economico\",\r\n    \"precio\": \"1500\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/producto/add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producto",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MzI5MDcsImV4cCI6MTcxNzgzNjUwN30.b_qWzTDGXK-Fx2zUyy25Z6N2o95TYzYQeZ4UEr6TbbcgJ9ScpyMkpY2CzYqU0PK-_fln6qfg7HnwvdRnq5o0kQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/producto/delete/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producto",
+								"delete",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Productos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MzE2NzcsImV4cCI6MTcxNzgzNTI3N30.86DCjXxmrRNY7oa2duaibji8_CTHW6YSRf7HQHP1RnxxFuPcq9PG3SJSY_ECaYU7TO1nhJmuJglV7Fn6EekB3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/producto/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producto",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MzQzMDMsImV4cCI6MTcxNzgzNzkwM30.zEPXnpkbwr-I0x544QZtVqLjY8q7D_nGPrdrKFSbGjHstozeLTcYlpSuVgFAs6wv5b69NKl2UyTyUG09-5wiHA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/producto/getById/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producto",
+								"getById",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Productos por Categoria",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MzQxMTgsImV4cCI6MTcxNzgzNzcxOH0.A1db8PZW_pbrWgSYymvA2NVc0P4TJxlcisxWjUBV1HnSjoZywS2yGYMIfx1W7DpwRn8uivUNj8X7aq2PnZpBrw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/producto/getByCategoria/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producto",
+								"getByCategoria",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MzIyMDAsImV4cCI6MTcxNzgzNTgwMH0.JxP47uXwjAtll6qfGqD6QBbyE-QdZqWp64nLA4UIjSPQCA2gOl09LUPu_yPQy3q-xTLyOLAfRzE8NAap9uxrHg",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"categoriaId\":\"2\",\r\n    \"id\": 1,\r\n    \"nombre\": \"multimetro\",\r\n    \"precio\": 1700,\r\n    \"descripcion\":\"Nueva descripcion\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/producto/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producto",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar estado Producto",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MzM0MzYsImV4cCI6MTcxNzgzNzAzNn0.44FuXPCg2yuzxC_bx6Vm1zNko7IPhQGhwDiwdhmyP4iYeCa3HKR-8ipaBKEWYSDnbJFzVpx5feRwQPdCOUEqPA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 2,\r\n    \"status\":\"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/producto/updateStatus",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"producto",
+								"updateStatus"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Validar token",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MTQ1NTQsImV4cCI6MTcxNzgxODE1NH0.2nIRf4ee2La3Xi0cJnu8WNVBOkMRRDDgmMFvh8vkwxi4-NkMSGfLIHT8NKuTd0YYhq4UpA-nxqBgX6_Wg4zeU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/user/checkToken",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user",
+								"checkToken"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Registrar Usuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\":\"Merardo\",\r\n    \"numeroDeContacto\":567,\r\n    \"email\": \"merardo@gmail.com\",\r\n    \"password\":\"567\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/user/signup",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user",
+								"signup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Listar Usuarios",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MDkyNjcsImV4cCI6MTcxNzgxMjg2N30.TotlcRwJc-QGnMZr_OGfweU7Mqg4AkNjItI6CDsIQMRqFf2MlslcFW0TVh-bK9Q853RfTtNJuU9PBkJH9CWY3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8081/user/get",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user",
+								"get"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"juaco@gmail.com\",\r\n    \"password\":\"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MDkyNjcsImV4cCI6MTcxNzgxMjg2N30.TotlcRwJc-QGnMZr_OGfweU7Mqg4AkNjItI6CDsIQMRqFf2MlslcFW0TVh-bK9Q853RfTtNJuU9PBkJH9CWY3A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"3\",\r\n    \"status\":\"false\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/user/update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user",
+								"update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar Contraseña de usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiYWRtaW4iLCJzdWIiOiJqdWFjb0BnbWFpbC5jb20iLCJpYXQiOjE3MTc4MTQ3NzQsImV4cCI6MTcxNzgxODM3NH0.LwYW5bL9w1vrIMXzjkdglyWBtzUTmvpdcJdMPNAF4gf-1x2foKANYWhbkhMfthJV6n4duERY4P-FPXsBDvMIa",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"1234\",\r\n    \"newPassword\":\"root\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8081/user/changePassword",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"user",
+								"changePassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
